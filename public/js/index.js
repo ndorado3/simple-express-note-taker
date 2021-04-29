@@ -1,4 +1,3 @@
-
 let noteTitle;
 let noteText;
 let saveNoteBtn;
@@ -12,7 +11,6 @@ if (window.location.pathname === "/notes") {
   newNoteBtn = document.querySelector(".new-note");
   noteList = document.querySelectorAll(".list-container .list-group");
 }
-
 
 // Show an element
 const show = (elem) => {
@@ -35,6 +33,7 @@ const getNotes = () =>
     },
   });
 
+//POST creates a new note
 const saveNote = (note) =>
   fetch("/api/notes", {
     method: "POST",
@@ -44,6 +43,7 @@ const saveNote = (note) =>
     body: JSON.stringify(note),
   });
 
+//Deletes notes by id
 const deleteNote = (id) =>
   fetch(`/api/notes/${id}`, {
     method: "DELETE",
