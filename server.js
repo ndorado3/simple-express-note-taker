@@ -1,11 +1,12 @@
 //Express package
-const express = require('express');
+const express = require("express");
 const application = express();
 
-// JSON Database
-let db = require('./db/db.json');
+
 
 //Seting up the port
+//env = envirament variable
+//First chaeck if a port is available if not use port 5500
 const PORT = process.env.PORT || 5500;
 
 //Express application handiling data parsing
@@ -14,31 +15,11 @@ application.use(express.json());
 //Every file under public is available
 application.use(express.static('./public'));
 
-//ROUTES
-//HTML route to the mian page
-application.get('/', function (req, res) {
-  res.sendFile(`${__dirname}/public/views/index.html`);
-});
-
-//HTML route to the note taking page
-application.get('/notes', function (req, res) {
-  res.sendFile(`${__dirname}/public/views/notes.html`);
-});
-
-//API route to the database
-application.get('/api/notes', function (req, res) {
-  res.json(db);
-});
-
-//sets up the notes route 
-application.post('/api/notes', function(req,res){
-    const newNote = req.body;
-    notes.push(newNote);
-    res.json(newNote);
-});
-
-
+//Creates modular routes
+require('./routes/apiRoutes')(application)
+require('./routes/viewRoutes')(application)
 
 application.listen(PORT, () => {
-  console.log(`App is currently running on port ${PORT}`);
-});
+    console.log(`App is currently running on port ${PORT}`);
+  });
+  
