@@ -32,20 +32,20 @@ module.exports = (app) => {
   app.delete("/api/notes/:title", (req, res) => {
     const titleNote = JSON.parse(req.params.title);
     fs.readFile(__dirname, "../db/db.json", "utf8", (err, notes) => {
-        if (err) {
-          throw err;
+      if (err) {
+        throw err;
+      }
+      notes = JSON.parse(notes);
+      notes = notes.filter((val) => val.title !== titleNote);
+      fs.writeFile(
+        __dirname,
+        "../db/db.json",
+        JSON.stringify(notes),
+        (err, data) => {
+          if (err) throw err;
         }
-        notes = JSON.parse(notes);
-        notes = notes.filter((val) => val.title !== titleNote);
-        fs.writeFile(
-          __dirname,
-          "../db/db.json",
-          JSON.stringify(notes),
-          (err, data) => {
-            if (err) throw err;
-          }
-        );
-        res.json(notes);
+      );
+      res.json(notes);
     });
   });
 };

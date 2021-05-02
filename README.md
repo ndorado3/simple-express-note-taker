@@ -57,11 +57,11 @@ npm i express
 ## Usage
 
 The following is the live link of the application:
-- 
+
+* https://simple-express-note-taker.herokuapp.com/
 
 
-
-- The following images show the web application's appearance and functionality: 
+The following images show the web application's appearance and functionality: 
     
   * Main page: Click on the Get Start button:   
 ![Application main page](./public/img/1.png)
